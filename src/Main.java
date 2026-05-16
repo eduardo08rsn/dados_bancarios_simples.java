@@ -29,9 +29,9 @@ void main() {
         System.out.println("operações");
         System.out.println(" ");
 
-        System.out.println("1- consultar saldos");
+        System.out.println("1- consultar saldo");
         System.out.println("2- receber valor");
-        System.out.println("3- tranferir valor");
+        System.out.println("3- transferir valor");
         System.out.println("4- sair");
 
         i = inputInt(i);
@@ -40,7 +40,7 @@ void main() {
             case 1:
 
                 newLineSeparation();
-                System.out.println("seu saldo é: " + saldo);
+                System.out.println("seu saldo é: R$" + saldo);
                 newLineSeparation();
 
                 break;
@@ -48,7 +48,7 @@ void main() {
                 saldo = receive(saldo);
                 break;
             case 3:
-                saldo = tranfer(saldo);
+                saldo = transfer(saldo);
                 break;
             case 4:
                 exitCondition = true;
@@ -105,17 +105,30 @@ String inputString (String inputVar){
     return  inputVar;
 }
 
-double tranfer (double currentBalance){
+double transfer(double currentBalance){
 
-    double tranferBalance = 0;
+    double transferBalance = 0;
 
     newLineSeparation();
-    System.out.println("valor a ser retirado: ");
-    currentBalance -= inputDouble(tranferBalance);
+    System.out.println(" digite o valor a ser transferido: ");
+    transferBalance = inputDouble(transferBalance);
 
-    System.out.println("seu novo saldo é: " + currentBalance);
-    newLineSeparation();
-    return currentBalance ;
+    if (transferBalance > currentBalance){
+
+        System.out.println("não é possível transferir esse valor!");
+        newLineSeparation();
+        return currentBalance;
+
+    }else {
+
+        currentBalance -= transferBalance;
+
+        System.out.println("seu novo saldo é: R$" + currentBalance);
+        newLineSeparation();
+        return currentBalance ;
+    }
+
+
 }
 
 double receive (double currentBalance){
@@ -125,8 +138,8 @@ double receive (double currentBalance){
     newLineSeparation();
     System.out.println("digite o valor a ser recebido: ");
     currentBalance += inputDouble(requestedBalance);
-    
-    System.out.println("seu novo saldo é: " + currentBalance);
+
+    System.out.println("seu novo saldo é: R$" + currentBalance);
     newLineSeparation();
 
     return currentBalance ;
